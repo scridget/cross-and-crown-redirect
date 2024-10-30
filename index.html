@@ -1,133 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>#000000</title>
-    <link type="image/x-icon" rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGD4z0ABYBw1gGE0DBhGw4BhWIQBAE5OEAELnjVHAAAAAElFTkSuQmCC">
+    <link rel="canonical" href="https://www.crossandcrowntx.church/">
+    <meta http-equiv="refresh" content="60;url=https://www.crossandcrowntx.church/">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&amp;family=Neuton:ital,wght@0,400;0,700;1,400">
+    <link rel="icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/60244d3e4cb3136314b2e5e2/1613084144515-582BLKTSFKIA4AJIQM8B/favicon.ico?format=100w">
+    <title>FBCR is now Cross and Crown!</title>
     <style>
-        :root {
-            --color: #000000;
-            --color-transparent: #00000022;
-        }
-
-        ::selection {
-            background: var(--color-transparent);
-        }
-
-        html,
         body {
-            background: var(--color);
-            height: 100%;
-            margin: 0;
+            margin: 20px;
+            padding: 20px;
+            background-color: #272725;
+            color: #fff;
+            font-family: Neuton, serif;
+            font-size: 20px;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
         }
-
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+        h1 {
+            text-transform:uppercase;
+            font-weight: 700;
+            font-family: Montserrat, Arial, sans-serif;
         }
-
-        #color {
-            background: white;
-            color: var(--color);
-            font-size: 2.5rem;
-            font-weight: 300;
-            padding: 2.25rem 3rem;
-            font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-            cursor: text;
+        .redirect {
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #b29d65;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: 700;
+            font-family: Montserrat, Arial, sans-serif;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #978657;
         }
     </style>
 </head>
-
 <body>
-    <p id="color">#000000</p>
+    <h1>FBC Roanoke is now Cross and Crown!</h1>
+    <p>First Baptist Church Roanoke has officially merged with Cross and Crown Church. We have joined their services at Cox Elementary School for the time being.</p>
+    
+    <p><strong style="color:#b29d65;">Service Time:</strong><br>Sundays 10:00 AM</p>
+    <p><strong style="color:#b29d65;">Location:</strong><br>Gymnasium at Cox Elementary<br>
+    1100 Litsey Rd, Roanoke</p>
+    
+    <p>Thank you for your understanding and support during this transition. We look forward to worshipping together!</p>
+    
+    <p>For more information, please contact us or continue to the Cross and Crown website.</p>
+    
+    <div class="redirect">
+        <p>You will be redirected in <span id="countdown">60</span> seconds. If you want to go there now, click the button below:</p>
+        <a class="button" id="redirect-button" href="https://www.crossandcrowntx.church/">Cross and Crown</a> <!-- Replace with the actual URL -->
+    </div>
+
     <script>
-        function randomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
+        let countdown = 60;
+        const countdownElement = document.getElementById('countdown');
+        const redirectButton = document.getElementById('redirect-button');
+        const redirectUrl = redirectButton.href;
 
-        function hslToHex(h, s, l) {
-            h /= 360;
-            s /= 100;
-            l /= 100;
-            var r = void 0,
-                g = void 0,
-                b = void 0;
-            if (s === 0) {
-                r = g = b = l; // achromatic
-            } else {
-                var hue2rgb = function hue2rgb(p, q, t) {
-                    if (t < 0) t += 1;
-                    if (t > 1) t -= 1;
-                    if (t < 1 / 6) return p + (q - p) * 6 * t;
-                    if (t < 1 / 2) return q;
-                    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-                    return p;
-                };
-                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-                var p = 2 * l - q;
-                r = hue2rgb(p, q, h + 1 / 3);
-                g = hue2rgb(p, q, h);
-                b = hue2rgb(p, q, h - 1 / 3);
+        const countdownInterval = setInterval(() => {
+            countdown -= 1;
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = redirectUrl;
             }
-            var toHex = function toHex(x) {
-                var hex = Math.round(x * 255).toString(16);
-                return hex.length === 1 ? '0' + hex : hex;
-            };
-            return '#' + toHex(r) + toHex(g) + toHex(b);
-        }
-
-        window.onload = function () {
-            let stopProp = function (ev) {
-                ev.stopPropagation();
-            }
-
-            var colorElement = document.getElementById("color");
-            colorElement.addEventListener("click", stopProp, false);
-            colorElement.addEventListener("mousedown", stopProp, false);
-
-            var setFavicon = function (hex) {
-                var canvas = document.createElement('canvas');
-                canvas.width = 16;
-                canvas.height = 16;
-                var ctx = canvas.getContext('2d');
-                ctx.fillStyle = hex;
-                ctx.fillRect(0, 0, 16, 16);
-                document.getElementsByTagName('link')[0].href = canvas.toDataURL("image/x-icon");
-            }
-
-            var setRandomColor = function setRandomColor() {
-                var h = void 0,
-                    s = void 0,
-                    l = void 0;
-
-                h = randomInt(0, 359);
-                s = randomInt(55, 75);
-                l = randomInt(40, 60);
-
-                document.documentElement.style.setProperty('--color', 'hsl(' + h + ', ' + s + '%, ' + l + '%)');
-                var hex = hslToHex(h, s, l);
-                document.title = hex;
-                colorElement.innerHTML = hex;
-                document.documentElement.style.setProperty('--color-transparent', hex + '22');
-
-                setFavicon(hex);
-            };
-            setRandomColor();
-
-            var body = document.getElementsByTagName("body")[0];
-            body.addEventListener("mousedown", function (ev) {
-                ev.preventDefault();
-            });
-            body.addEventListener("click", function () {
-                setRandomColor();
-            }, false);
-        };
+        }, 1000);
     </script>
-</body>
 
+</body>
 </html>
